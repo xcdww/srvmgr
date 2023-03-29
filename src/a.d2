@@ -1,0 +1,47 @@
+direction: right
+ps: project structure{
+    VM{
+        direction: right;
+        dv: docker volume
+        dc: docker containers{
+            psql: postgresql
+            psql.shape: cylinder
+            fastapi
+            nginx
+            nginx -> fastapi{
+                style.animated: true
+            }
+            fastapi -> psql{
+                style.animated: true
+            }
+
+            fastapi.style.multiple: true
+
+        }
+        dc.psql -- dv
+
+    }
+    Airflow{
+
+    }
+
+    user
+
+    GCS
+
+    user -> VM.dc.nginx{
+        style.animated: true
+    }
+    user -> GCS{
+        style.animated: true
+    }
+    VM.dc.fastapi -> GCS{
+        style.animated: true
+    }
+    Airflow -> GCS{
+        style.animated: true
+    }
+    Airflow -> VM.dc.psql{
+        style.animated: true
+    }
+}
